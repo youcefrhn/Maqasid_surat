@@ -1,0 +1,31 @@
+@import "tailwindcss";
+
+@theme {
+  --font-amiri: "Amiri", serif;
+  --font-tajawal: "Tajawal", sans-serif;
+}
+
+body {
+  font-family: "Tajawal", sans-serif;
+  background-color: #faf9f6;
+  direction: rtl;
+}
+
+/* Custom gorgeous scrollbar for desktop */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f5f4ef;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d4cfb8;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #059669;
+}
