@@ -1,44 +1,44 @@
-name: Build and Deploy PWA
+name: Deploy PWA to GitHub Pages
 
 on:
   push:
     branches:
       - main
 
-# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: pages
   cancel-in-progress: true
 
 jobs:
   build_site:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: 20
+          cache: npm
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: npm ci
 
-      - name: Build PWA
+      - name: Build
         run: npm run build
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-      - name: Upload Artifacts
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' # Update this if your framework outputs to a different folder (e.g., 'build' or 'out')
+          path: dist
 
   deploy:
     needs: build_site
